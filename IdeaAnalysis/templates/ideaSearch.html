@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<br/><br/>
+<div class="container m-auto">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-success">
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong> {{ messages[0] }}  </strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       
+    </div>
+{% endif %}
+{% endwith %}
+<div class="row">
+    <div class="col-sm-6 ">
+        <div class="card w-100 m-auto">
+            <div class="card-body">
+                <div class="card-header">
+                    <h5 class="card-title">UPLOAD CSV FILE</h5>
+                </div>
+                <br/>
+				<form action='./getSearchResult' method='POST' action="" enctype="multipart/form-data">
+                    <div class="form-group">                      
+                      <input type="file" class="form-control" name="csvfile" placeholder="Upload_csv" accept=".csv">                     
+                    </div>                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+            </div>
+        </div>
+    </div>	
+</div>
+{% if my_dict %}
+<div class="row">
+  <div class="col-sm-12 ">
+      <div class="card w-100 m-auto">
+          <div class="card-body">
+              <h1> </h1>
+              <table class="table">
+			  <tr><th>Part name</th><th>Matching ideas</th></tr>
+                {% for key, value in my_dict.items() %}
+				   <tr>
+						<th> {{ key }} </th>
+						<td> {{ value | upper }} </td>
+				   </tr>
+{% endfor %}
+              </table>
+          </div>
+        </div>
+  </div> 
+</div>
+{% endif %}
+{% if Search %}
+   
+{% endif %}
+
+
+
+    
+</div>
+  {% endblock %}
